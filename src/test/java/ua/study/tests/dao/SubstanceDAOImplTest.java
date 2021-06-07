@@ -75,7 +75,7 @@ public class SubstanceDAOImplTest {
 
         verify(utilMock, times(1)).getConnection();
         verify(connectionMock, times(1)).prepareStatement(anyString());
-        verify(preparedStatementMock, times(2)).setLong(anyInt(), anyLong());
+        verify(preparedStatementMock, times(1)).setLong(anyInt(), anyLong());
         verify(preparedStatementMock, times(3)).setString(anyInt(), anyString());
         verify(preparedStatementMock, times(1)).setTimestamp(anyInt(), ArgumentMatchers.<Timestamp>any());
         verify(preparedStatementMock, times(1)).setDouble(anyInt(), anyDouble());

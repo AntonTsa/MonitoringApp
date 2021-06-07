@@ -26,11 +26,10 @@ public class SensorDAOImpl implements SensorDAO {
             connection = util.getConnection();
             preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setLong(1, sensor.getSensorId());
-            preparedStatement.setString(2, sensor.getName());
-            preparedStatement.setLong(3, sensor.getPlace().getPlaceId());
-            preparedStatement.setString(4, sensor.getAddress());
-            preparedStatement.setString(5, sensor.getStatus().name());
+            preparedStatement.setString(1, sensor.getName());
+            preparedStatement.setLong(2, sensor.getPlace().getPlaceId());
+            preparedStatement.setString(3, sensor.getAddress());
+            preparedStatement.setString(4, sensor.getStatus().name());
 
             preparedStatement.executeUpdate();
         } catch (Exception e) {

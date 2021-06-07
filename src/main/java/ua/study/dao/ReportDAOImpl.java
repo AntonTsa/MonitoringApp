@@ -27,7 +27,6 @@ public class ReportDAOImpl implements ReportDAO {
             connection = util.getConnection();
             preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setLong(1, report.getReportId());
             preparedStatement.setString(2, report.getReportType().name());
             preparedStatement.setString(3, report.getContent());
             preparedStatement.setTimestamp(4, report.getUpdated());

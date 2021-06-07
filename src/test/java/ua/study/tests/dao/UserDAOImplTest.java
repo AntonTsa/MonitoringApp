@@ -56,11 +56,8 @@ public class UserDAOImplTest {
         UserDAO instance = new UserDAOImpl(utilMock);
         instance.add(userMock);
 
-
-
         verify(utilMock, times(1)).getConnection();
         verify(connectionMock, times(1)).prepareStatement(anyString());
-        verify(preparedStatementMock, times(1)).setLong(anyInt(), anyLong());
         verify(preparedStatementMock, times(3)).setString(anyInt(), anyString());
         verify(preparedStatementMock, times(1)).executeUpdate();
         verify(preparedStatementMock, times(1)).close();

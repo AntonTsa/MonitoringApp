@@ -25,11 +25,10 @@ public class EmergencyDAOImpl implements EmergencyDAO {
             connection = util.getConnection();
             preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setLong(1, emergency.getEmergencyId());
-            preparedStatement.setString(2, emergency.getName());
-            preparedStatement.setLong(3, emergency.getPlace().getPlaceId());
-            preparedStatement.setString(4, emergency.getDescription());
-            preparedStatement.setTimestamp(5, emergency.getTimestamp());
+            preparedStatement.setString(1, emergency.getName());
+            preparedStatement.setLong(2, emergency.getPlace().getPlaceId());
+            preparedStatement.setString(3, emergency.getDescription());
+            preparedStatement.setTimestamp(4, emergency.getTimestamp());
 
             preparedStatement.executeUpdate();
         } catch (Exception e) {

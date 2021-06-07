@@ -25,9 +25,8 @@ public class PlanDAOImpl implements PlanDAO {
             connection = util.getConnection();
             preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setLong(1, plan.getPlanId());
-            preparedStatement.setString(2, plan.getSteps());
-            preparedStatement.setLong(3, plan.getEmergency().getEmergencyId());
+            preparedStatement.setString(1, plan.getSteps());
+            preparedStatement.setLong(2, plan.getEmergency().getEmergencyId());
 
             preparedStatement.executeUpdate();
         } catch (Exception e) {

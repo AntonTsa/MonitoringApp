@@ -27,13 +27,12 @@ public class SubstanceDAOImpl implements SubstanceDAO {
             connection = util.getConnection();
             preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setLong(1, substance.getSubstanceId());
-            preparedStatement.setString(2, substance.getName());
-            preparedStatement.setString(3, substance.getHabitat().name());
-            preparedStatement.setDouble(4, substance.getAmount());
-            preparedStatement.setTimestamp(5, substance.getDate());
-            preparedStatement.setString(6, substance.getNote());
-            preparedStatement.setLong(7, substance.getSensor().getSensorId());
+            preparedStatement.setString(1, substance.getName());
+            preparedStatement.setString(2, substance.getHabitat().name());
+            preparedStatement.setDouble(3, substance.getAmount());
+            preparedStatement.setTimestamp(4, substance.getDate());
+            preparedStatement.setString(5, substance.getNote());
+            preparedStatement.setLong(6, substance.getSensor().getSensorId());
 
             preparedStatement.executeUpdate();
         } catch (Exception e) {

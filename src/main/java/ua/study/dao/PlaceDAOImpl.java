@@ -25,10 +25,9 @@ public class PlaceDAOImpl implements PlaceDAO {
             connection = util.getConnection();
             preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setLong(1, place.getPlaceId());
-            preparedStatement.setString(2, place.getRegion());
-            preparedStatement.setString(3, place.getDistrict());
-            preparedStatement.setString(4, place.getObject());
+            preparedStatement.setString(1, place.getRegion());
+            preparedStatement.setString(2, place.getDistrict());
+            preparedStatement.setString(3, place.getObject());
 
             preparedStatement.executeUpdate();
         } catch (Exception e) {

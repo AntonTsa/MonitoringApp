@@ -26,10 +26,9 @@ public class UserDAOImpl implements UserDAO {
             connection = util.getConnection();
             preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setLong(1, user.getUserId());
-            preparedStatement.setString(2, user.getFullName());
-            preparedStatement.setString(3, user.getLogin());
-            preparedStatement.setString(4, user.getPassword());
+            preparedStatement.setString(1, user.getFullName());
+            preparedStatement.setString(2, user.getLogin());
+            preparedStatement.setString(3, user.getPassword());
 
             preparedStatement.executeUpdate();
         } catch (Exception e) {

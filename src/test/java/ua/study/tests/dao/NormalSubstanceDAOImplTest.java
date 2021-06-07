@@ -74,7 +74,7 @@ public class NormalSubstanceDAOImplTest {
 
         verify(utilMock, times(1)).getConnection();
         verify(connectionMock, times(1)).prepareStatement(anyString());
-        verify(preparedStatementMock, times(2)).setLong(anyInt(), anyLong());
+        verify(preparedStatementMock, times(1)).setLong(anyInt(), anyLong());
         verify(preparedStatementMock, times(2)).setString(anyInt(), anyString());
         verify(preparedStatementMock, times(2)).setDouble(anyInt(), anyDouble());
         verify(preparedStatementMock, times(1)).executeUpdate();

@@ -26,12 +26,11 @@ public class NormalSubstanceDAOImpl implements NormalSubstanceDAO {
             connection = util.getConnection();
             preparedStatement = connection.prepareStatement(sql);
 
-            preparedStatement.setLong(1, normalSubstance.getNormalSubstanceId());
-            preparedStatement.setString(2, normalSubstance.getName());
-            preparedStatement.setDouble(3, normalSubstance.getMinAmount());
-            preparedStatement.setDouble(4, normalSubstance.getMaxAmount());
-            preparedStatement.setString(5, normalSubstance.getHabitat().name());
-            preparedStatement.setLong(6, normalSubstance.getPlace().getPlaceId());
+            preparedStatement.setString(1, normalSubstance.getName());
+            preparedStatement.setDouble(2, normalSubstance.getMinAmount());
+            preparedStatement.setDouble(3, normalSubstance.getMaxAmount());
+            preparedStatement.setString(4, normalSubstance.getHabitat().name());
+            preparedStatement.setLong(5, normalSubstance.getPlace().getPlaceId());
 
             preparedStatement.executeUpdate();
         } catch (Exception e) {
