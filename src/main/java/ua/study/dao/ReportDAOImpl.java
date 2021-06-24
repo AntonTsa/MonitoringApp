@@ -68,6 +68,37 @@ public class ReportDAOImpl implements ReportDAO {
         return reportList;
     }
 
+    @Override
+    public List<Report> getAllByType(ReportType type) throws SQLException {
+        String sql = "SELECT report_id, type, content, updated, status FROM report WHERE type = ?";
+
+        List<Report> reportList = new ArrayList<>();
+
+        try {
+            connection = util.getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1, type.name());
+
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Report report = setReport();
+
+                reportList.add(report);
+            }
+
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            resultSet.close();
+            preparedStatement.close();
+            connection.close();
+        }
+        return reportList;
+    }
+
     private Report setReport() throws SQLException {
         Report report = new Report();
 

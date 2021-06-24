@@ -1,6 +1,7 @@
 package ua.study.dao;
 
 import ua.study.entity.User;
+import ua.study.entity.enums.Role;
 import ua.study.util.Util;
 
 import java.sql.*;
@@ -21,7 +22,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void add(User user) throws SQLException {
-        String sql = "INSERT INTO usr(usr_id, full_name, login, password) value(?, ?, ?, ?)";
+        String sql = "INSERT INTO usr(full_name, login, password, role) value(?, ?, ?, ?)";
         try{
             connection = util.getConnection();
             preparedStatement = connection.prepareStatement(sql);
@@ -29,6 +30,7 @@ public class UserDAOImpl implements UserDAO {
             preparedStatement.setString(1, user.getFullName());
             preparedStatement.setString(2, user.getLogin());
             preparedStatement.setString(3, user.getPassword());
+            preparedStatement.setString(4, user.getRole().name());
 
             preparedStatement.executeUpdate();
         } catch (Exception e) {
@@ -41,7 +43,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public List<User> getAll() throws SQLException {
-        String sql = "SELECT usr_id, full_name, login, password FROM usr";
+        String sql = "SELECT usr_id, full_name, login, password, role FROM usr";
 
         List<User> userList = new ArrayList<>();
 
@@ -68,7 +70,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public User getById(Long id) throws SQLException {
-        String sql = "SELECT usr_id, full_name, login, password FROM usr WHERE usr_id = ?";
+        String sql = "SELECT usr_id, full_name, login, password, role FROM usr WHERE usr_id = ?";
 
         User user = null;
 
@@ -100,13 +102,14 @@ public class UserDAOImpl implements UserDAO {
         user.setFullName(resultSet.getString("full_name"));
         user.setLogin(resultSet.getString("login"));
         user.setPassword(resultSet.getString("password"));
+        user.setRole((Role) resultSet.getObject("role"));
 
         return user;
     }
 
     @Override
     public void update(User user) throws SQLException {
-        String sql = "UPDATE usr SET full_name=?, login=?, password=? WHERE usr_id=?";
+        String sql = "UPDATE usr SET full_name=?, login=?, password=?, role=? WHERE usr_id=?";
 
         try {
             connection = util.getConnection();
@@ -115,7 +118,8 @@ public class UserDAOImpl implements UserDAO {
             preparedStatement.setString(1, user.getFullName());
             preparedStatement.setString(2, user.getLogin());
             preparedStatement.setString(3, user.getPassword());
-            preparedStatement.setLong(4, user.getUserId());
+            preparedStatement.setString(4, user.getRole().name());
+            preparedStatement.setLong(5, user.getUserId());
 
             preparedStatement.executeUpdate();
         } catch (Exception e) {

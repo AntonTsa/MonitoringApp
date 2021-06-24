@@ -41,11 +41,14 @@
       <version>1.18.20</version>
       <scope>provided</scope>
     </dependency>
-      <dependency>
-          <groupId>com.fasterxml</groupId>
-          <artifactId>classmate</artifactId>
-          <version>1.5.1</version>
-      </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>3.19.0</version>
+      <scope>test</scope>
+    </dependency>
+
+
   </dependencies>
 
   <build>

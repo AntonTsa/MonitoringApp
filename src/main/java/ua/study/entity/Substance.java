@@ -27,15 +27,6 @@ public class Substance {
 
     }
 
-    public Substance(String name, Habitat habitat, Double amount, Timestamp date, String note, Sensor sensor) {
-        this.name = name;
-        this.habitat = habitat;
-        this.amount = amount;
-        this.date = date;
-        this.note = note;
-        this.sensor = sensor;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

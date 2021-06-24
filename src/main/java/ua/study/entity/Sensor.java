@@ -20,13 +20,6 @@ public class Sensor {
 
     }
 
-    public Sensor(String name, Place place, String address, SensorStatus status) {
-        this.name = name;
-        this.place = place;
-        this.address = address;
-        this.status = status;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

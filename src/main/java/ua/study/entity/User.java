@@ -2,6 +2,7 @@ package ua.study.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import ua.study.entity.enums.Role;
 
 public class User {
     @Getter @Setter
@@ -12,15 +13,18 @@ public class User {
     private String login;
     @Getter @Setter
     private String password;
+    @Getter @Setter
+    private Role role;
 
     public User() {
 
     }
 
-    public User(String fullName, String login, String password) {
+    public User(String fullName, String login, String password, Role role) {
         this.fullName = fullName;
         this.login = login;
         this.password = password;
+        this.role = role;
     }
 
     @Override

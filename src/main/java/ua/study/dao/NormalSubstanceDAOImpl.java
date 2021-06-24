@@ -68,6 +68,8 @@ public class NormalSubstanceDAOImpl implements NormalSubstanceDAO {
         return normalSubstanceList;
     }
 
+
+
     private NormalSubstance setNormalSubstance() throws SQLException {
         NormalSubstance normalSubstance = new NormalSubstance();
 

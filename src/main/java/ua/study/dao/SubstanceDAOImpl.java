@@ -70,6 +70,36 @@ public class SubstanceDAOImpl implements SubstanceDAO {
         return substanceList;
     }
 
+    @Override
+    public List<Substance> getAllBySensorId(Long id) throws SQLException {
+        String sql = "SELECT substance_id, substance_name, habitat, amount, date_time, note, sensor_id FROM substance WHERE sensor_id = ?";
+
+        List<Substance> substanceList = new ArrayList<>();
+
+        try {
+            connection = util.getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setLong(1, id);
+
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Substance substance = setSubstance();
+
+                substanceList.add(substance);
+            }
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            resultSet.close();
+            preparedStatement.close();
+            connection.close();
+        }
+        return substanceList;
+    }
+
     private Substance setSubstance() throws SQLException {
         Substance substance = new Substance();
 

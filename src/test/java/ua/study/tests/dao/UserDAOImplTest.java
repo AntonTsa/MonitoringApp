@@ -2,10 +2,12 @@ package ua.study.tests.dao;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 import ua.study.dao.UserDAO;
 import ua.study.dao.UserDAOImpl;
 import ua.study.entity.User;
+import ua.study.entity.enums.Role;
 import ua.study.util.Util;
 
 import java.sql.*;
@@ -27,10 +29,12 @@ public class UserDAOImplTest {
         when(userMock.getFullName()).thenReturn("Anton");
         when(userMock.getLogin()).thenReturn("admin");
         when(userMock.getPassword()).thenReturn("adminP");
+        when(userMock.getRole()).thenReturn(Role.ADMIN);
         doNothing().when(userMock).setUserId(anyLong());
         doNothing().when(userMock).setFullName(anyString());
         doNothing().when(userMock).setLogin(anyString());
         doNothing().when(userMock).setPassword(anyString());
+        doNothing().when(userMock).setRole(ArgumentMatchers.<Role>any());
 
         when(utilMock.getConnection()).thenReturn(connectionMock);
         when(connectionMock.prepareStatement(anyString())).thenReturn(preparedStatementMock);
@@ -46,6 +50,7 @@ public class UserDAOImplTest {
         when(resultSetMock.getString(eq("full_name"))).thenReturn("Anton");
         when(resultSetMock.getString(eq("login"))).thenReturn("admin");
         when(resultSetMock.getString(eq("password"))).thenReturn("admin");
+        when(resultSetMock.getString(eq("role"))).thenReturn("ADMIN");
         doNothing().when(resultSetMock).close();
         doNothing().when(statementMock).close();
         when(preparedStatementMock.executeQuery()).thenReturn(resultSetMock);
@@ -58,7 +63,7 @@ public class UserDAOImplTest {
 
         verify(utilMock, times(1)).getConnection();
         verify(connectionMock, times(1)).prepareStatement(anyString());
-        verify(preparedStatementMock, times(3)).setString(anyInt(), anyString());
+        verify(preparedStatementMock, times(4)).setString(anyInt(), anyString());
         verify(preparedStatementMock, times(1)).executeUpdate();
         verify(preparedStatementMock, times(1)).close();
         verify(connectionMock, times(1)).close();
@@ -75,6 +80,7 @@ public class UserDAOImplTest {
         verify(resultSetMock, times(2)).next();
         verify(resultSetMock, times(1)).getLong(anyString());
         verify(resultSetMock, times(3)).getString(anyString());
+        verify(resultSetMock, times(1)).getObject(anyString());
         verify(resultSetMock, times(1)).close();
         verify(statementMock, times(1)).close();
         verify(connectionMock, times(1)).close();
@@ -91,6 +97,7 @@ public class UserDAOImplTest {
         verify(preparedStatementMock, times(1)).executeQuery();
         verify(resultSetMock, times(1)).getLong(anyString());
         verify(resultSetMock, times(3)).getString(anyString());
+        verify(resultSetMock, times(1)).getObject(anyString());
         verify(preparedStatementMock, times(1)).executeUpdate();
         verify(resultSetMock, times(1)).close();
         verify(preparedStatementMock, times(1)).close();
@@ -104,7 +111,7 @@ public class UserDAOImplTest {
 
         verify(utilMock, times(1)).getConnection();
         verify(connectionMock, times(1)).prepareStatement(anyString());
-        verify(preparedStatementMock, times(3)).setString(anyInt(), anyString());
+        verify(preparedStatementMock, times(4)).setString(anyInt(), anyString());
         verify(preparedStatementMock, times(1)).setLong(anyInt(), anyLong());
         verify(preparedStatementMock, times(1)).executeUpdate();
         verify(preparedStatementMock, times(1)).close();
